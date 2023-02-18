@@ -11,10 +11,11 @@ import {
 } from "@chakra-ui/menu";
 import { Box,Text } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { Avatar } from '@chakra-ui/react';
+import { Avatar, Drawer, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react';
 import {ChatState} from "../../../../context/ChatProvider";
 import ProfileModal from './ProfileModal';
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import {useDisclosure} from "@chakra-ui/hooks"
 
 const SideDrawer = () => {
   const [serach,setSerach] = useState("");
@@ -24,6 +25,7 @@ const SideDrawer = () => {
 
   const {user} =ChatState();
   const history = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const logoutHandler = () => {
     localStorage.removeItem("user");
@@ -42,7 +44,7 @@ const SideDrawer = () => {
       p="5px 10px 5px 10px"
       borderWidth="5px">
           <Tooltip label="serach Users t0 chat " hasArrow placement="bottom-end">
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={onOpen}>
           <i className="fa-solid fa-magnifying-glass"></i>
           <Text d={{base:"none",md:"flex"}} px={4}>Serch user</Text>
           </Button>
@@ -68,6 +70,12 @@ const SideDrawer = () => {
             </Menu>
           </div>
       </Box>
+      <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay/>
+          <DrawerContent>
+          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          </DrawerContent>
+      </Drawer>
     </div>
   )
 }
