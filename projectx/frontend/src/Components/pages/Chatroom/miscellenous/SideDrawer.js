@@ -21,6 +21,7 @@ const SideDrawer = () => {
   const[loading, setloading] = useState("");
   const[loadingChat, setloadingChat] = useState("");
 
+  const {user} =ChatState();
   
 
 
@@ -34,10 +35,10 @@ const SideDrawer = () => {
       w="790%"
       p="5px 10px 5px 10px"
       borderWidth="5px">
-          <Tooltip label="serach Users tp chat " hasArrow placement="bottom-end">
+          <Tooltip label="serach Users t0 chat " hasArrow placement="bottom-end">
           <Button variant="ghost">
           <i className="fa-solid fa-magnifying-glass"></i>
-          <Text d={{base:"none",md:"flex"}}>Serch user</Text>
+          <Text d={{base:"none",md:"flex"}} px={4}>Serch user</Text>
           </Button>
           </Tooltip>
           <div>
@@ -46,7 +47,19 @@ const SideDrawer = () => {
               <BellIcon fontSize="2*l" m={1}/>
               </MenuButton>
             </Menu>
-            
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon/>}>
+              <Avatar size='sm' cursor='pointer' name={user.firstname} src={user.pic}/>
+              </MenuButton>
+              <MenuList>
+                <ProfileModal user={user}>
+                <MenuItem>My Profile</MenuItem>
+                </ProfileModal>
+                
+                <MenuDivider/>
+                <MenuItem>Logout</MenuItem>
+              </MenuList>
+            </Menu>
           </div>
       </Box>
     </div>

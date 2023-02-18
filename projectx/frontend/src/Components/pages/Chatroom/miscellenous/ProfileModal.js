@@ -19,6 +19,7 @@ const ProfileModal = ({user , children}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
+   
       {
       children ? (<span onClick={onOpen}>{children}</span>):(
         <IconButton 
@@ -27,13 +28,13 @@ const ProfileModal = ({user , children}) => {
             onClick={onOpen}
         />
       )
-    }
+    } 
 
-<Modal size="sm" isOpen={isOpen} onClose={onClose} isCentered>
+<Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent h="200px">
+        <ModalContent h="410px">
           <ModalHeader fontSize="40px" fontfamily="Work Sans" d="flex" justifyContent="center">
-            {user.name}
+            {user.firstname}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody 
@@ -65,7 +66,7 @@ const ProfileModal = ({user , children}) => {
             
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> 
     </>
   )
 }
