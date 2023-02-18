@@ -14,6 +14,7 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import { Avatar } from '@chakra-ui/react';
 import {ChatState} from "../../../../context/ChatProvider";
 import ProfileModal from './ProfileModal';
+import {useNavigate} from "react-router-dom"
 
 const SideDrawer = () => {
   const [serach,setSerach] = useState("");
@@ -22,7 +23,12 @@ const SideDrawer = () => {
   const[loadingChat, setloadingChat] = useState("");
 
   const {user} =ChatState();
-  
+  const history = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    history.push("/");
+  };
 
 
   return (
@@ -57,7 +63,7 @@ const SideDrawer = () => {
                 </ProfileModal>
                 
                 <MenuDivider/>
-                <MenuItem>Logout</MenuItem>
+                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
               </MenuList>
             </Menu>
           </div>
